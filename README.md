@@ -1,4 +1,3 @@
-Here's a detailed README file content for your Diffusion-based Voice Conversion Model project on GitHub:
 
 ---
 
@@ -19,7 +18,7 @@ Here's a detailed README file content for your Diffusion-based Voice Conversion 
 - [Acknowledgements](#acknowledgements)
 
 ## Introduction
-The Diffusion-based Voice Conversion Model is a state-of-the-art voice conversion framework that leverages diffusion processes to achieve high-quality voice synthesis. This project aims to convert the voice of one speaker to another while preserving the linguistic content and naturalness of the speech.
+The Diffusion-based Voice Conversion Model is a state-of-the-art voice conversion framework that leverages diffusion processes to achieve high-quality voice synthesis. This project aims to convert the voice of one speaker to another while preserving the linguistic content and naturalness of the speech. [Note that this is an on-going research project]
 
 ## Features
 - High-quality voice conversion using diffusion processes.
@@ -44,58 +43,49 @@ To get started with the project, follow these steps:
    ```
 
 3. **Download datasets:**
-   Place your datasets in the `datasets` directory following the structure mentioned in the [Data Preparation](#data-preparation) section.
+   Place your datasets in the `Data` directory following the structure mentioned in the [Data Preparation](#data-preparation) section. Create `wavs` folder to store speaker folders in it.
 
 ## Usage
 
 ### Data Preparation
+Run extract_mel_emb.py file to get mel-spectrograms and embeddings.
 Organize your datasets as follows:
 ```
-datasets/
-├── audio/
+Data/
+├── wavs/
 │   ├── s1/
 │   │   ├── 1001_DFA_DIS_XX.wav
 │   ├── s2/
 │   │   ├── 1002_DFA_DIS_XX.wav
 │   └── ...
-├── video/
-│   ├── s1/
-│   │   ├── 1001_DFA_DIS_XX.mp4
-│   ├── s2/
-│   │   ├── 1002_DFA_DIS_XX.mp4
-│   └── ...
+├── mels/
+|   ├──s1/
+|   |  ├── 1001_DFA_DIS_XX.npy
+|   |__ ...
+├── embeds/
+|   ├──s1/
+|   |  ├──1001_DFA_DIS_XX.pkl
+|   |__ ...
 ```
 
 ### Training
-To train the model, run the following command:
+There are two parts two be trained in this model. One for train_enc file (forward diffusion) and another is train_dec.py (reverse diffusion)
+Now, you can even use a pretrained model instead of training the forward diffusion part. Model will be saved in `logs_dec` which will be used for inference.
+otherwise for reverse diffusion part, run the following command:
 ```bash
-python train.py --config config/train_config.yaml
+python train_dec.py 
 ```
-Modify the `config/train_config.yaml` to set your training parameters.
 
 ### Inference
-For inference, use the following command:
-```bash
-python infer.py --input audio.wav --output converted_audio.wav --model_path checkpoints/model.pth
-```
-Ensure that the model checkpoint is specified correctly.
+For inference, save some seen audio files in `example` folder and run `inference` jupyter notebook.
+
+Ensure that the model checkpoint is saved in `checkpts\vc`.
 
 ## Model Architecture
 The model architecture includes:
 - **UNet**: Used for encoding and decoding audio features.
 - **Diffusion Process**: Applied to enhance the quality of voice conversion.
 - **Speaker Encoder**: Extracts speaker embeddings from input audio.
-
-## Results
-Here you can showcase some of the results obtained using your model, including audio samples and quantitative metrics.
-
-## Contributing
-We welcome contributions from the community! To contribute:
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes and commit them.
-4. Push your changes to your fork.
-5. Create a pull request.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -104,5 +94,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 We would like to thank the contributors and the open-source community for their valuable work and support.
 
 ---
-
-This template provides a comprehensive overview of your project, guiding users through installation, usage, and contributing processes while also highlighting the main features and structure of the project. Adjust the sections as needed to fit the specifics of your project.
