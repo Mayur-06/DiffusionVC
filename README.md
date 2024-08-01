@@ -13,7 +13,6 @@
   - [Inference](#inference)
 - [Model Architecture](#model-architecture)
 - [Results](#results)
-- [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
